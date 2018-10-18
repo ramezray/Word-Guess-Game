@@ -3,7 +3,7 @@ var wordsArray = ['celery', 'carrot', 'potatoes'];
 //set the wins points to 0.
 var wins = 0;
 //set the tries for player.                                    
-var tries = 10;
+var tries = 5;
 //array for letter player will guess.         
 var letterGuessed = [];
 //index of the word that have in the array.
@@ -18,7 +18,7 @@ var gameStarted = false;
 var gameFinished = false;
 // Folowing console logs for test purposes.
 gameReset()
-console.log(wins);
+console.log(wordsArray);
 console.log(tries);
 console.log(remainGusses);
 console.log(letterGuessed);
@@ -28,15 +28,11 @@ console.log(wordIndex);
 function gameReset() {
     remainGusses = tries;
     gameStarted = false;
-
-
     wordIndex = Math.floor(Math.random() * wordsArray.length);
-
     letterGuessed = [];
     gussingWord = [];
-
     for (i = 0; i < wordsArray[wordIndex].length; i++) {
-        gussingWord.push("_");
+        gussingWord.push(" _ ");
     }
     update();
 };
@@ -54,6 +50,8 @@ function update() {
     //when no more remain guesses game finish will change state to be ture to the finish the game
     if (remainGusses <= 0) {
         gameFinished = true;
+        alert("lost");
+        gameReset();
     }
 };
 
@@ -74,7 +72,7 @@ document.onkeydown = function (event) {
 //will create a function here for each guess 
 function makeGuess(letter) {
     if (remainGusses > 0) {
-        if (!gameStarted) {
+        if (gameStarted) {
             gameStarted = true;
         }
 
@@ -89,12 +87,13 @@ function makeGuess(letter) {
     winChecker();
 };
 
-//function to check if player wins
+//function to check if player wins and increament wins by 1
 function winChecker() {
-    //here with if statement will ck if there any more underecores left in the gussingWord array
-    if (gussingWord.indexOf("_") === -1) {
+    if (gussingWord.indexOf(" _ ") === -1) {
         wins++;
         gameFinished = true;
+        gameReset();
+        alert("You Won");
     }
 }
 
@@ -122,11 +121,6 @@ function evaluateGuess(letter) {
         }
     }
 };
-
-
-
-
-
 
 
 
