@@ -2,6 +2,8 @@
 var wordsArray = ['celery', 'carrot', 'potatoes'];
 //set the wins points to 0.
 var wins = 0;
+//set the lost points to 0.
+var lost = 0;
 //set the tries for player.                                    
 var tries = 5;
 //array for letter player will guess.         
@@ -40,6 +42,7 @@ function gameReset() {
 //Function to update my index.html page
 function update() {
     document.getElementById("wins").innerText = wins;
+    document.getElementById("lost").innerText = lost;
     document.getElementById("currentWord").innerText = "";
     for (i = 0; i < gussingWord.length; i++) {
         //here will add the current word to gussingWord array.
@@ -50,7 +53,8 @@ function update() {
     //when no more remain guesses game finish will change state to be ture to the finish the game
     if (remainGusses <= 0) {
         gameFinished = true;
-        alert("lost");
+        lost++;
+        alert("Sorry, You lost Press OK to try agian!!");
         gameReset();
     }
 };
@@ -82,7 +86,6 @@ function makeGuess(letter) {
             evaluateGuess(letter);
         }
     }
-
     update();
     winChecker();
 };
@@ -93,7 +96,7 @@ function winChecker() {
         wins++;
         gameFinished = true;
         gameReset();
-        alert("You Won");
+        alert("Greet, You Won");
     }
 }
 
@@ -121,62 +124,3 @@ function evaluateGuess(letter) {
         }
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //This is an array that PC will choose from
-// var vegName = ['Broccoli', 'cabbage', 'celery'];
-// //This is an array that will hol dwhat PC will choose from the vegName array
-// var PCPicked = [];
-// //Start score for the win points
-// var wins = 0;
-// //Start remain chances
-// var remain = 15;
-// //An array to hold letter already player choce and is not in the word
-// var alreadyGuessed = [];
-
-// var randomItem = vegName[Math.floor(Math.random() * vegName.length)];
-
-// var wins = document.getElementById("wins");
-// var remain = document.getElementById("remain");
-// console.log(randomItem);
-// console.log("======================")
-
-// //function to show what player keyed
-// var userText = document.getElementById("user-text");
-// document.onkeyup = function (event) {
-//     userText.key = event.key;
-// }
-// //for loop to break that vegName to letters
-// for (var i = 0; i < randomItem.length; i++) {
-//     console.log(randomItem.charAt(i));
-// }
-// if (userText === i) {
-//     wins++;
-// } else remain--;
-
-
-
-// var playerchoice = document.getElementById("player-choice");
-// var pcchoice = document.getElementById("pc-choice");
-// var wins = document.getElementById("wins");
-// var playerguess = document.getElementById("game");
-// document.onkeyup = function (event) {
-//     playerguess = event.key;
-//     var playerguess = event.key;    
-// }
